@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Карта Барнаула</title>
+    <style>
+      /* Простые стили */
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+        color: #2c3e50;
+      }
+
+      /* Контейнер для карты */
+      #map {
+        width: 100%;
+        height: 700px;
+        margin: 20px 0;
+        border: 2px solid #3498db;
+        border-radius: 10px;
+      }
+
+      /* Кнопка назад */
+      .back-btn {
+        display: inline-block;
+        background: #3498db;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Карта достопримечательностей</h1>
+    <div id="map"></div>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=1d1b242c-3e9e-41ea-85db-f3040914e19b&lang=ru_RU"></script>
+    <script>
+      ymaps.ready(function () {
+        var map = new ymaps.Map("map", {
+          center: [53.347996, 83.779806],
+          zoom: 12,
+          controls: ["searchControl", "zoomControl", "geolocationControl"], // Встроенные контролы
+        });
+
+        // Добавляем метки достопримечательностей
+        var places = [
+          { coords: [53.343333, 83.793333], name: "Нагорный парк" },
+          { coords: [53.332222, 83.768333], name: "Парк Изумрудный" },
+          { coords: [53.331667, 83.791667], name: "Демидовская площадь" },
+          { coords: [53.336111, 83.775], name: "Ленточный бор" },
+          { coords: [53.334722, 83.788889], name: "Музей Горная аптека" },
+          { coords: [53.32, 83.67], name: "Зоопарк Лесная сказка" },
+          { coords: [53.333333, 83.783333], name: "Музей Мир камня" },
+        ];
+
+        places.forEach(function (place) {
+          var marker = new ymaps.Placemark(place.coords, {
+            balloonContent: "<strong>" + place.name + "</strong>",
+          });
+          map.geoObjects.add(marker);
+        });
+      });
+    </script>
+    <a href="index1.html" class="back-btn">← Назад к достопримечательностям</a>
+  </body>
+</html>
